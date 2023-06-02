@@ -100,9 +100,11 @@ jobs:
         env:
           THEOS: ${{ github.workspace }}/theos
 
-      - name: Download TikTok iPA
+      - name: Prepare TikTok iPA
         run: |
+          curl "https://raw.githubusercontent.com/Muirey03/RemoteLog/master/RemoteLog.h" --output "$THEOS/include/RemoteLog.h"
           wget "$TIKTOK_URL" --no-verbose -O main/TikTok.ipa && echo -e "==> \033[1mTikTok v${{ inputs.tiktok_version }} downloaded! \033[0m"
+          unzip -q ./main/TikTok.ipa -d ./main/tmp
 
         env:
           THEOS: ${{ github.workspace }}/theos
