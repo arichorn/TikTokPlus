@@ -102,7 +102,7 @@ jobs:
 
       - name: Download TikTok iPA
         run: |
-          wget "$TIKTOK_URL" --no-verbose -O main/YouTube.ipa && echo -e "==> \033[1mTikTok v${{ inputs.tiktok_version }} downloaded! \033[0m"
+          wget "$TIKTOK_URL" --no-verbose -O main/TikTok.ipa && echo -e "==> \033[1mTikTok v${{ inputs.tiktok_version }} downloaded! \033[0m"
 
         env:
           THEOS: ${{ github.workspace }}/theos
@@ -115,7 +115,7 @@ jobs:
           cd ${{ github.workspace }}/main
           sed -i '' "27s#.*#BUNDLE_ID = ${{ env.BUNDLE_ID }}#g" Makefile
           sed -i '' "26s#.*#DISPLAY_NAME = ${{ env.APP_NAME }}#g" Makefile          
-          make package IPA=YouTube.ipa FINALPACKAGE=1
+          make package IPA=TikTok.ipa FINALPACKAGE=1
           (mv "packages/$(ls -t packages | head -n1)" "packages/TikTokPlus_${{ env.TIKTOK_VERSION  }}_${{ env.TIKTOKPLUS_VERSION }}.ipa")
           echo "package=$(ls -t packages | head -n1)" >>$GITHUB_OUTPUT
           echo -e "==> \033[1mSHASUM256: $(shasum -a 256 packages/*.ipa | cut -f1 -d' ')\033[0m"
